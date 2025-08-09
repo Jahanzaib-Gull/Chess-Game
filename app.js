@@ -62,6 +62,10 @@ io.on("connection", (socket) => {
         socket.emit("roleMessage", "You are a spectator");
     }
 
+    // Emit initial board state and turn to new connections
+    socket.emit("boardState", chess.fen());
+    socket.emit("turn", chess.turn());
+
     // Handle moves
     socket.on("move", (move) => {
         try {
@@ -102,6 +106,6 @@ io.on("connection", (socket) => {
     });
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Server running on port ${port}`);
-});
+});F
